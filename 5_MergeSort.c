@@ -30,24 +30,27 @@ void merge(int *arr, int beg, int mid, int end)
     }
     while (i < n1)
     {
-        count++;
+        // count++;
         arr[k++] = left[i++];
     }
     while (j < n2)
     {
-        count++;
+        // count++;
         arr[k++] = right[j++];
     }
 }
 
 void mergeSort(int *arr, int beg, int end)
 {
+
     if (beg < end)
     {
         int mid = (beg + end) / 2;
         mergeSort(arr, beg, mid);
         mergeSort(arr, mid + 1, end);
         merge(arr, beg, mid, end);
+    }else {
+        return;
     }
 }
 
@@ -68,8 +71,10 @@ void worst(int arr[], int beg, int end)
         worst(b, mid + 1, end);
         for (i = 0; i < n1; i++)
             arr[i] = a[i];
-        for (j = i; j < n2; j++)
-            arr[j + 1] = b[j];
+        for (j = 0; j < n2; j++)
+            arr[j] = b[j];
+    }else{
+        return;
     }
 }
 
@@ -112,9 +117,9 @@ void plotter()
         fprintf(f1, "%d\t%d\n", n, count);
         count = 0;
         worst(arr, 0, n - 1);
-        for (int i = 0; i < n; i++)
-            fprintf(f4, "%d", *(arr + i));
-        fprintf(f4, "\n");
+        // for (int i = 0; i < n; i++)
+        //     fprintf(f4, "%d", *(arr + i));
+        // fprintf(f4, "\n");
         mergeSort(arr, 0, n - 1); // worst case
         fprintf(f2, "%d\t%d\n", n, count);
         for (int i = 0; i < n; i++)
@@ -131,7 +136,7 @@ void plotter()
     printf("Data is entered into file\n");
 }
 
-void main()
+int main()
 {
     int ch;
     printf("Enter your choice: \n\n1.Tester\n2.Plotter\n\n");
